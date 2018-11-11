@@ -1,4 +1,4 @@
-# IotSensorNode
+ # IotSensorNode
 prototype for a NodeMCU based sensor node exposing temperature, Humidity and a 433 MHZ Controller via REST interface
 
 ## neede hardware
@@ -28,7 +28,7 @@ this node is intendet as an Endpoint for home automation. the 433 MHZ interfaces
 ## Wiring
 
 | PIN | Belegung| Device   |
-|-----|---------|..........|
+| ----- | --------- | ----------- |
 | D1  | SCL     | BME 280  |
 | D2  | SDA     | BME 280  |
 | D8  | DATA    | 433 MHZ Send |
