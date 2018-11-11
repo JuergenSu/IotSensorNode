@@ -181,13 +181,5 @@ void setup() {
 void loop() {
 
   server.handleClient();
-  /**
-  
-         
-          } else if (HTTP_req.indexOf(F("/api/v1/rcswitch/send")) > -1) {
-            // 24 Bit 433 MHZ senden
-
-          } 
-  */
 }
 
