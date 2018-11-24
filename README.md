@@ -33,3 +33,6 @@ this node is intendet as an Endpoint for home automation. the 433 MHZ interfaces
 | D2  | SDA     | BME 280  |
 | D8  | DATA    | 433 MHZ Send |
 | D4  | DATA    | 433 MHZ Recieve |
+
+## Power Supply
+You should considder using a boost converter to power the 433 MHZ sender otherwise range will be limited. NodeMCU modules can typically handle more than 3.3 V at the VIN pin. 
