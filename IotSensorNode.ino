@@ -7,10 +7,6 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include "config.h"
-// Replace with your network credentials
-
-
-
 
 //define Switch 
 RCSwitch mySwitch = RCSwitch();
@@ -20,8 +16,8 @@ BME280I2C bme;    // Default : forced mode, standby time = 1000 ms
                   // Oversampling = pressure ×1, temperature ×1, humidity ×1, filter off,
                   
 
- 
-ESP8266WebServer server(80);   //instantiate server at port 80 (http port)
+//instantiate server at port 80 (http port)
+ESP8266WebServer server(80); 
 
 void setup() {
   // Open serial communications and wait for port to open:
@@ -30,10 +26,11 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
+  // Switch of internal default AP and switch to Client Only Mode
   WiFi.mode(WIFI_STA);
 
-  // start the WIFI connection and the server:
-  WiFi.begin(ssid, password); //begin WiFi connection
+  // start the WIFI connection
+  WiFi.begin(ssid, password); 
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -68,9 +65,9 @@ void setup() {
   }
 
   //RCSwitch enablen
-  //Warnign RC Switch uses GPIO Numbering not PIN numers
-  mySwitch.enableReceive(2);  // Receiver on GPIO2 => that is pin #4
-  mySwitch.enableTransmit(15); // Sender on GPIO 18 => that is pin #8
+  //Warnign RC Switch uses GPIO Numbering not PIN numbers
+  mySwitch.enableReceive(2);  // Receiver on GPIO 2 => that is pin #4
+  mySwitch.enableTransmit(15); // Sender on GPIO 15 => that is pin #8
 
 
   server.on("/", [](){
@@ -79,10 +76,12 @@ void setup() {
     Serial.println("-> INDEX");
 
     server.sendHeader("Connection", "close");
-    server.send(200, "application/json", "{\"temp\":\"GET /api/v1/environment\", \"switch_read\":\"GET /api/v1/rcswitch/read\", \"switch_send\":\"GET /api/v1/rcswitch/send/<value>\"}");
+    server.send(200, "application/json", "{\"temp\":\"GET /api/v1/environment\", \"switch_read\":\"GET /api/v1/rcswitch/read\", \"switch_send\":\"GET /api/v1/rcswitch/send?code=<value>\"}");
             
   });
 
+  // Send an 433 MHZ  24 Bit Code represented by a integer
+  
   server.on("/api/v1/rcswitch/send", [](){           
     Serial.println("-> RC SEND");
     String code = server.arg("code");
@@ -98,6 +97,7 @@ void setup() {
     server.send(200, "application/json", "{\"OK\"}");
   });
 
+  // Puts the Server in listen Mode for 10 Seconds to recieve a codesequence
   server.on("/api/v1/rcswitch/read", [](){
     Serial.println("-> RC_SCAN");
     int timeout=100;
@@ -135,8 +135,9 @@ void setup() {
   });
 
 
+  // intendet for environment informations and for checking for overheating
   server.on("/api/v1/environment", [](){           
-    //BME Auslesen und in JSON Verpacken 
+    //Read BME values and send respose
   
             
     Serial.println("-> Temp");

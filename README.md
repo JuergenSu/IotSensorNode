@@ -1,10 +1,11 @@
- # IotSensorNode
-prototype for a NodeMCU based sensor node exposing temperature, Humidity and a 433 MHZ Controller via REST interface
+# IotSensorNode
+prototype for a NodeMCU based sensor node exposing temperature, Humidity and a 433 MHZ Controller via REST like interface
 
 ## neede hardware
-- NodeMCU
-- 433 mhz reciever and sender
+- NodeMCU or compatible
+- 433 mhz reciever and sender for example DEBO 433 RX/TX
 - BMP280 Sensor
+- Boost converter for example MT3608 
 
 
 ## supported endpoints
@@ -27,7 +28,7 @@ this node is intendet as an Endpoint for home automation. the 433 MHZ interfaces
 
 ## Wiring
 
-| PIN | Belegung| Device   |
+| PIN | Wiring | Device   |
 | ----- | --------- | ----------- |
 | D1  | SCL     | BME 280  |
 | D2  | SDA     | BME 280  |
@@ -35,4 +36,4 @@ this node is intendet as an Endpoint for home automation. the 433 MHZ interfaces
 | D4  | DATA    | 433 MHZ Recieve |
 
 ## Power Supply
-You should considder using a boost converter to power the 433 MHZ sender otherwise range will be limited. NodeMCU modules can typically handle more than 3.3 V at the VIN pin. 
+You should consider using a boost converter to power the 433 MHZ sender otherwise range will be limited. NodeMCU modules can typically handle more than 3.3 V at the VIN pin, check the builtin voltage regulator, mine rans fine at 9V. 
