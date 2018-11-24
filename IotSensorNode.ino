@@ -6,10 +6,8 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
-
+#include "config.h"
 // Replace with your network credentials
-const char* ssid = "SSID";
-const char* password = "PASSWORD";
 
 
 
@@ -25,9 +23,6 @@ BME280I2C bme;    // Default : forced mode, standby time = 1000 ms
  
 ESP8266WebServer server(80);   //instantiate server at port 80 (http port)
 
-// COntainer for the HTTP request
-String HTTP_req;
-
 void setup() {
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
@@ -35,8 +30,9 @@ void setup() {
     ; // wait for serial port to connect. Needed for native USB port only
   }
 
+  WiFi.mode(WIFI_STA);
 
-  // start the Ethernet connection and the server:
+  // start the WIFI connection and the server:
   WiFi.begin(ssid, password); //begin WiFi connection
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
@@ -181,13 +177,5 @@ void setup() {
 void loop() {
 
   server.handleClient();
-  /**
-  
-         
-          } else if (HTTP_req.indexOf(F("/api/v1/rcswitch/send")) > -1) {
-            // 24 Bit 433 MHZ senden
-
-          } 
-  */
 }
 
