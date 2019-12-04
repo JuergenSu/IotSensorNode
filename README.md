@@ -36,4 +36,4 @@ this node is intendet as an Endpoint for home automation. the 433 MHZ interfaces
 | D4  | DATA    | 433 MHZ Recieve |
 
 ## Power Supply
-You should consider using a boost converter to power the 433 MHZ sender otherwise range will be limited. NodeMCU modules can typically handle more than 3.3 V at the VIN pin, check the builtin voltage regulator, mine rans fine at 9V. 
+You should consider using a boost converter to power the 433 MHZ sender otherwise range will be limited. NodeMCU modules can typically handle more than 3.3 V at the VIN pin, check the builtin voltage regulator, mine runs fine at 9V. Morover an antenna for the 433 MHZ sender could boost range a lot 
